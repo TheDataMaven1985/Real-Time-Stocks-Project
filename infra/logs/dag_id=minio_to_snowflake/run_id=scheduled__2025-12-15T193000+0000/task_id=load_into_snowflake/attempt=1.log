@@ -1,0 +1,24 @@
+[2025-12-15T19:35:15.907+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-15T19:35:16.035+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: minio_to_snowflake.load_into_snowflake scheduled__2025-12-15T19:30:00+00:00 [queued]>
+[2025-12-15T19:35:16.052+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: minio_to_snowflake.load_into_snowflake scheduled__2025-12-15T19:30:00+00:00 [queued]>
+[2025-12-15T19:35:16.053+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-12-15T19:35:16.090+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_into_snowflake> on 2025-12-15 19:30:00+00:00
+[2025-12-15T19:35:16.109+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=54856) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-15T19:35:16.114+0000] {standard_task_runner.py:64} INFO - Started process 54862 to run task
+[2025-12-15T19:35:16.112+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'minio_to_snowflake', 'load_into_snowflake', 'scheduled__2025-12-15T19:30:00+00:00', '--job-id', '203', '--raw', '--subdir', 'DAGS_FOLDER/minio_to_snowflake.py', '--cfg-path', '/tmp/tmpvtm6o0dg']
+[2025-12-15T19:35:16.119+0000] {standard_task_runner.py:91} INFO - Job 203: Subtask load_into_snowflake
+[2025-12-15T19:35:16.292+0000] {task_command.py:426} INFO - Running <TaskInstance: minio_to_snowflake.load_into_snowflake scheduled__2025-12-15T19:30:00+00:00 [running]> on host 4abec113d47e
+[2025-12-15T19:35:16.503+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='minio_to_snowflake' AIRFLOW_CTX_TASK_ID='load_into_snowflake' AIRFLOW_CTX_EXECUTION_DATE='2025-12-15T19:30:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-12-15T19:30:00+00:00'
+[2025-12-15T19:35:16.506+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-15T19:35:16.555+0000] {logging_mixin.py:188} INFO - Received 265 files from previous task.
+[2025-12-15T19:35:16.556+0000] {logging_mixin.py:188} INFO - Cnnecting to Snowflake...
+[2025-12-15T19:35:16.558+0000] {connection.py:408} INFO - Snowflake Connector for Python Version: 3.11.0, Python Version: 3.12.4, Platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.36
+[2025-12-15T19:35:16.560+0000] {connection.py:1258} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2025-12-15T19:35:16.577+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x726825df6390>: Failed to establish a new connection: [Errno -2] Name or service not known')': /session/v1/login-request?request_id=3739affc-1c62-4add-a743-3bd0ebd47c89&databaseName=STOCKS_DB&schemaName=COMMON&warehouse=COMPUTE_WH&request_guid=ffdcfeca-33e7-42e6-ab5c-944c772f8df6
+[2025-12-15T19:35:21.615+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x726825c4f5f0>: Failed to establish a new connection: [Errno -5] No address associated with hostname')': /session/v1/login-request?request_id=4eb4334f-b5de-4f4d-9037-3e23f81e8808&databaseName=STOCKS_DB&schemaName=COMMON&warehouse=COMPUTE_WH&request_guid=350e3593-c74e-4bbf-a1cf-c49424939b22
+[2025-12-15T19:35:25.626+0000] {logging_mixin.py:188} INFO - Error in load_into_snowflake: 250001: 250001: Could not connect to Snowflake backend after 2 attempt(s).Aborting
+[2025-12-15T19:35:25.627+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-15T19:35:25.628+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-15T19:35:25.658+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=minio_to_snowflake, task_id=load_into_snowflake, run_id=scheduled__2025-12-15T19:30:00+00:00, execution_date=20251215T193000, start_date=20251215T193516, end_date=20251215T193525
+[2025-12-15T19:35:25.707+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-12-15T19:35:25.733+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
