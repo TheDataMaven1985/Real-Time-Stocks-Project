@@ -44,8 +44,8 @@ We capture **live stock market data** from an external API, stream it in real ti
 
 ```text
 real-time-stocks-pipeline/
-├── producer/                     # Kafka producer (Finnhub API)
-│   └── producer.py
+├── api_request/                     # Kafka producer (Finnhub API)
+│   └── api_request.py
 ├── consumer/                     # Kafka consumer (MinIO sink)
 │   └── consumer.py
 ├── dbt_stocks/models/
@@ -53,7 +53,7 @@ real-time-stocks-pipeline/
 │   │   ├── bronze_stg_stock_quotes.sql
 │   │   └── sources.yml
 │   ├── silver
-│   │   └── silver_clean_stock_quotes.sql
+│   │   └── silver_stock_quotes.sql
 │   └── gold
 │       ├── gold_candlestick.sql
 │       ├── gold_kpi.sql
@@ -86,9 +86,9 @@ real-time-stocks-pipeline/
 ---
 
 ### **2. Live Market Data Producer**
-- Developed **Python producer script** `stock_producer.py` to fetch **real-time stock prices** from the **Finnhub API** using an API key.
+- Developed **Python producer script** `stock_producer.py` to fetch **real-time stock prices** from the **Alpha Vantage** using an API key.
 - Streams stock data into Kafka in JSON format.
-- [Producer Code](producer/producer.py)
+- api_request/api_request.py
 
 ---
 
@@ -96,7 +96,7 @@ real-time-stocks-pipeline/
 - Built **Python consumer script** `stock_consumer.py` to consume streaming data from Kafka.
 - Stored consumed data into **MinIO buckets** (S3-compatible storage).
 - Organized storage into folders for **raw/bronze layer ingestion**.
-- [Consumer Code](consumer/consumer.py)
+- consumer/consumer.py
 
 ---
 
@@ -104,7 +104,7 @@ real-time-stocks-pipeline/
 - Initialized **Apache Airflow** in Docker.
 - Created DAG (`stock_pipeline_dag.py`) to:
   - Load data from MinIO into **Snowflake staging tables** (Bronze).
-  - Schedule automated runs every **1 minute**.
+  - Schedule automated runs every **5 minute**.
 - [Airflow DAGs](dag/minio_to_snowflake.py)
 
 ---
@@ -121,7 +121,7 @@ real-time-stocks-pipeline/
 - Configured **DBT project** with Snowflake connection.
 - Models include:
   - [**Bronze models**](dbt_stocks/models/bronze/bronze_stg_stock_quotes.sql) → raw structured data  
-  - [**Silver models**](dbt_stocks/models/silver/silver_clean_stock_quotes.sql) → cleaned, validated data  
+  - [**Silver models**](dbt_stocks/models/silver/silver_stock_quotes.sql) → cleaned, validated data  
   - [**Gold models**](dbt_stocks/models/gold) → analytical views (Candlestick, KPI, Tree Map)
       
 
@@ -145,9 +145,3 @@ real-time-stocks-pipeline/
 - **Power BI dashboard with live insights**  
 
 ---
-
-**Author**: *Jaya Chandra Kadiveti* 
-
-**LinkedIn**: [username](https://www.linkedin.com/in/jayachandrakadiveti/) 
-
-**Contact**: [datawithjay1@gmail.com](mailto:datawithjay1@gmail.com)
